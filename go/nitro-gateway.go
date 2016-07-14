@@ -2,10 +2,12 @@ package main
 
 import (
     "fmt"
-    // "encoding/json"
-    // "io/ioutil"
+    "encoding/json"
+    "io/ioutil"
     "net/http"
 )
+
+var fakeNitro map[string]interface{}
 
 func check(e error) {
     if e != nil {
@@ -13,22 +15,23 @@ func check(e error) {
     }
 }
 
+func loadFakeNitro() {
+    dat, err := ioutil.ReadFile("./fake-nitro.json")
+    check(err)
+
+    check(json.Unmarshal(dat, &fakeNitro))
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
+    var pid = r.URL.Path[7:]
 
-    // dat, err := ioutil.ReadFile("./fake-nitro.json")
-    // check(err)
-    // fmt.Println(dat)
-
-    // var parsed map[string]interface{}
-
-    // check(json.Unmarshal(dat, &parsed))
-    // fmt.Println(parsed)
-
-    fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+    asset, _ := json.Marshal(fakeNitro[pid])
+    fmt.Fprintf(w, string(asset))
 }
 
 func main() {
-    fmt.Println("Nitro Gateway listening on 3001");
-    http.HandleFunc("/", handler)
+    loadFakeNitro()
+    fmt.Println("Nitro Gateway listening on 3001")
+    http.HandleFunc("/asset/", handler)
     http.ListenAndServe(":3001", nil)
 }
