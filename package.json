@@ -10,6 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "api": "nodemon bin/api",
     "nitro": "nodemon bin/nitro-gateway",
+    "nitro-go-build": "make",
+    "nitro-go": "go-bin/nitro-gateway",
     "uas": "nodemon bin/uas-gateway",
     "list-builder": "nodemon bin/list-builder",
     "list-retriever": "nodemon bin/list-retriever"
