@@ -1,5 +1,6 @@
 var fs = require('fs');
 var express = require('express');
+var eventSource = require('../lib/event-source');
 
 var app = express();
 var builtLists;
@@ -20,8 +21,10 @@ app.get('/:user/:listName', function (request, response) {
 });
 
 readBuiltLists();
-fs.watch('built-lists.json', 'utf8', readBuiltLists);
-
 app.listen(3003, function () {
     console.log('List Retriever listening on port 3003');
+    eventSource.init('list-retriever', function () {
+        console.log('Connected to RabbitMQ!');
+        eventSource.on('list-built', readBuiltLists);
+    });
 });

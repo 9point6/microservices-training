@@ -14,6 +14,7 @@ function saveList(userId, listType) {
     });
 
     fs.writeFileSync('built-lists.json', JSON.stringify(builtLists), 'utf8');
+    eventSource.emit('list-built');
 }
 
 function createUserIfMissing(user, listName) {

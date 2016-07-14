@@ -39,7 +39,7 @@ app.get('/:user/:listType', require('../lib/routes/uas-get-list'));
 app.listen(3002, function () {
     console.log('UAS Gateway listening on port 3002');
     eventSource.init('uas-gateway', function () {
-        console.log('Connected to RabbitMQ!')
+        console.log('Connected to RabbitMQ!');
         eventSource.on('follow', actionHandlerGenerator('follows', 'follow'));
         eventSource.on('unfollow', actionHandlerGenerator('follows', 'unfollow'));
 
