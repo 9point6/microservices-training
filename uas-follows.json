@@ -1,1 +1,1 @@
-{"denise":[{"pid":"abc"},{"pid":"xyz"},{"pid":"def"}],"john":[{"pid":"abc"},{"pid":"xyz"},{"pid":"dfgdsfhh"},{"pid":"123"}]}
+{"dionysia":[],"john":[{"activityType":"follows","personId":"john","resourceId":"abc","resourceType":"brand","resourceDomain":"radio","created":"Thu Jul 14 2016 15:32:37 GMT+0100 (BST)","action":"followed","@id":"urn:bbc:radio:episode:abc"}]}
