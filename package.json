@@ -11,7 +11,8 @@
     "monolithic": "nodemon bin/monolithic-process",
     "nitro": "nodemon bin/nitro-gateway",
     "uas": "nodemon bin/uas-gateway",
-    "list-builder": "nodemon bin/list-builder"
+    "list-builder": "nodemon bin/list-builder",
+    "list-retriever": "nodemon bin/list-retriever"
   },
   "repository": {
     "type": "git",
