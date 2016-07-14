@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "monolithic": "nodemon bin/monolithic-process",
-    "nitro": "nodemon bin/nitro-gateway"
+    "nitro": "nodemon bin/nitro-gateway",
+    "uas": "nodemon bin/uas-gateway"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "nodemon": "^1.9.2",
+    "rabbit.js": "^0.4.4",
     "request": "^2.73.0"
   }
 }
