@@ -7,7 +7,7 @@
     "microservices-list-service": "monolithic-process.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd cuke && bundle exec cucumber",
     "api": "nodemon bin/api",
     "nitro": "nodemon bin/nitro-gateway",
     "nitro-go-build": "make",
