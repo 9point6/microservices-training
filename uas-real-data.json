@@ -1,0 +1,35 @@
+{
+    "total": 3,
+    "items": [
+        {
+            "activityType": "favourites",
+            "personId": "178414507310629889",
+            "resourceId": "p02v00bk",
+            "resourceType": "episode",
+            "resourceDomain": "radio",
+            "created": "2016-02-10T14:56:14Z",
+            "action": "favourited",
+            "@id": "urn:bbc:radio:episode:p02v00bk"
+        },
+        {
+            "activityType": "favourites",
+            "personId": "178414507310629889",
+            "resourceId": "p03j12pk",
+            "resourceType": "clip",
+            "resourceDomain": "radio",
+            "created": "2016-02-09T13:34:39Z",
+            "action": "favourited",
+            "@id": "urn:bbc:radio:clip:p03j12pk"
+        },
+        {
+            "activityType": "favourites",
+            "personId": "178414507310629889",
+            "resourceId": "p02zn3k0",
+            "resourceType": "clip",
+            "resourceDomain": "radio",
+            "created": "2016-02-09T10:38:50Z",
+            "action": "favourited",
+            "@id": "urn:bbc:radio:clip:p02zn3k0"
+        }
+    ]
+}
