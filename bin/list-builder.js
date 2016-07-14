@@ -59,7 +59,8 @@ function listDeleteGenerator(listType) {
     };
 }
 
-eventSource.init('monolithic-process', function () {
+console.log('Started List builder');
+eventSource.init('list-builder', function () {
     console.log('connected to rabbitMQ');
 
     eventSource.on('follow', listAddGenerator('follows'));

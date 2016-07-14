@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "monolithic": "nodemon bin/monolithic-process",
+    "api": "nodemon bin/api",
     "nitro": "nodemon bin/nitro-gateway",
     "uas": "nodemon bin/uas-gateway",
     "list-builder": "nodemon bin/list-builder",
