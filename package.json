@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "monolithic": "nodemon bin/monolithic-process",
     "nitro": "nodemon bin/nitro-gateway",
-    "uas": "nodemon bin/uas-gateway"
+    "uas": "nodemon bin/uas-gateway",
+    "list-builder": "nodemon bin/list-builder"
   },
   "repository": {
     "type": "git",
