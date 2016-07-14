@@ -1,0 +1,32 @@
+{
+    "123": {
+        "pid": "123",
+        "title": "some asset",
+        "image": "http://www.bbc.co.uk/someimage.jpg",
+        "type": "Audio"
+    },
+    "234": {
+        "pid": "234",
+        "title": "some other asset",
+        "image": "http://www.bbc.co.uk/someotherimage.jpg",
+        "type": "Audio"
+    },
+    "abc": {
+        "pid": "abc",
+        "title": "another asset",
+        "image": "http://www.bbc.co.uk/image.jpg",
+        "type": "Audio"
+    },
+    "def": {
+        "pid": "def",
+        "title": "asset",
+        "image": "http://www.bbc.co.uk/image.jpg",
+        "type": "Audio"
+    },
+    "xyz": {
+        "pid": "xyz",
+        "title": "a bit asset",
+        "image": "http://www.bbc.co.uk/aditionalimage.jpg",
+        "type": "Audio"
+    }
+}
