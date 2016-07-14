@@ -1,3 +1,4 @@
 node_modules
 go-bin
 npm-debug.log
+cuke/Gemfile.lock
