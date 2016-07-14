@@ -15,4 +15,6 @@ app.get('/:listType/:user', require('./lib/routes/get-list'));
 // Perform action on a list
 app.get('/:listType/:user/:action/:pid', require('./lib/routes/update-list'));
 
-app.listen(3000);
+app.listen(3000, function () {
+    console.log('Listening on port 3000');
+});
