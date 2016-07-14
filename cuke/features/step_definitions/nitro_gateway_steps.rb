@@ -1,12 +1,13 @@
-Given(/^I get an asset with pid (.*)$/) do |arg|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^I get an asset with pid (.*)$/) do |pid|
+  @response = nitro_gateway.asset(pid)
 end
 
 When(/^the pid exists$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@response).not_to be_nil
 end
 
 Then(/^the response of the pid has the following attributes$/) do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@response.keys).to match(table.raw.flatten)
+  # puts @response.keys
+  # puts table.raw.flatten
 end
