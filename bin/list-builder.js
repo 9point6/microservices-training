@@ -33,6 +33,7 @@ function getNitroAsset(pid, callback) {
 
 function listAddGenerator(listType) {
     return function (params) {
+        console.log('add', listType, params);
         var user = params.user;
         var pid = params.pid;
 
@@ -49,6 +50,7 @@ function listAddGenerator(listType) {
 
 function listDeleteGenerator(listType) {
     return function (params) {
+        console.log('delete', listType, params);
         var user = params.user;
         var pid = params.pid;
 

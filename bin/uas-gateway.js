@@ -9,8 +9,8 @@ var actionMap = {
         'delete-favourite': 'deleteFromList'
     },
     follows: {
-        'add-favourite': 'addToUserList',
-        'delete-favourite': 'deleteFromList'
+        'follow': 'addToUserList',
+        'unfollow': 'deleteFromList'
     }
 };
 
