@@ -4,7 +4,7 @@ var uasAdapter = require('../lib/uas-adapter');
 var serviceRegistration = require('../lib/service-registration');
 
 var config = {
-    port: 3002
+    port: 3000 + Math.floor(Math.random() * 1000)
 };
 
 var app = express();

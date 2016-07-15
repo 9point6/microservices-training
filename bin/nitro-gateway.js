@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var serviceRegistration = require('../lib/service-registration');
 
 var config = {
-    port: 3001
+    port: 3000 + Math.floor(Math.random() * 1000)
 };
 
 var app = express();
