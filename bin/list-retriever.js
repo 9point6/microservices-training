@@ -18,6 +18,7 @@ app.get('/:user/:listName', function (request, response) {
     var user = request.params.user;
     var listName = request.params.listName;
 
+    console.log('list-retriever-get-list', user, listName);
     if (builtLists[user] && builtLists[user][listName]) {
         return response.send(builtLists[user][listName]);
     }

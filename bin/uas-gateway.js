@@ -21,6 +21,7 @@ var actionMap = {
 
 function actionHandlerGenerator(listType, actionName) {
     return function (params) {
+        console.log('queue-event', listType, actionName, params);
         var userName = params.user;
         var pid = params.pid;
 

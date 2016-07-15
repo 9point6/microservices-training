@@ -5,7 +5,7 @@ var eventSource = require('../lib/event-source');
 var serviceRegistration = require('../lib/service-registration');
 
 var config = {
-    port: 3000 + Math.floor(Math.random() * 1000)
+    port: 3000
 };
 
 var app = express();
