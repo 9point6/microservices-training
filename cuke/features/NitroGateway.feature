@@ -3,11 +3,16 @@ AS A User
 I WANT to add in one place my favourite episodes, clips and programmes
 SO THAT I can revisit them
  
-Scenario: provide asset for specific pid
-  Given I get an asset with pid abc
-  When the pid exists
+Scenario: Validation of asset request for specific pid
+  Given An asset with pid abc is being requested
+  When the pid exists in PIPS database
   Then the response of the pid has the following attributes
-  |pid|
-  |title|
-  |image|
-  |type|
+    | pid   |
+    | title |
+    | image |
+    | type  |
+
+Scenario: Validation of non-existing asset request for specific pid
+  Given An asset with pid hahaha is being requested
+   When the pid does not exist in PIPS database
+   Then An error is thrown as not found
