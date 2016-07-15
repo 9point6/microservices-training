@@ -30,9 +30,41 @@ function createUserIfMissing(user, listName) {
     }
 }
 
-function getNitroAsset(pid, callback) {
-    request('http://localhost:3001/asset/' + pid, callback);
-}
+var getNitroAsset = (function () {
+    var circuitBreakerOpen = false;
+
+    function generateDummyResponse(pid) {
+        return { pid: pid };
+    }
+
+    return function getNitroAsset(pid, callback) {
+        request('http://localhost:3001/asset/' + pid, function (err, response) {
+            if (circuitBreakerOpen) {
+                if (Date.now() > (circuitBreakerOpen + 10000)) {
+                    console.log('Nitro-gateway circuit breaker expired, trying again');
+                    circuitBreakerOpen = false;
+                } else {
+                    console.log('Nitro-gateway circuit breaker open, responding with dummy data');
+                    return callback('circuitBreakerOpen', generateDummyResponse(pid));
+                }
+            }
+
+            if (err) {
+                console.log('Nitro-gateway error, opening circuit breaker');
+                circuitBreakerOpen = Date.now();
+                return callback(err, generateDummyResponse(pid));
+            }
+
+            try {
+                callback(err, JSON.parse(response.body));
+            } catch (ex) {
+                console.log('Nitro-gateway JSON error, opening circuit breaker');
+                circuitBreakerOpen = Date.now();
+                callback(ex, generateDummyResponse(pid));
+            }
+        });
+    };
+})();
 
 function listAddGenerator(listType) {
     return function (params) {
@@ -40,8 +72,7 @@ function listAddGenerator(listType) {
         var user = params.user;
         var pid = params.pid;
 
-        getNitroAsset(pid, function (err, response) {
-            var asset = JSON.parse(response.body);
+        getNitroAsset(pid, function (err, asset) {
             if (asset) {
                 createUserIfMissing(user, listType);
                 builtLists[user][listType].push(asset);
