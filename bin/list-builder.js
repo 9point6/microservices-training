@@ -1,6 +1,9 @@
 var fs = require('fs');
 var request = require('request');
+var express = require('express');
 var eventSource = require('../lib/event-source');
+
+var app = express();
 var builtLists = JSON.parse(fs.readFileSync('built-lists.json', 'utf8'));
 
 function saveList(userId, listType) {
@@ -62,13 +65,16 @@ function listDeleteGenerator(listType) {
     };
 }
 
-console.log('Started List builder');
-eventSource.init('list-builder', function () {
-    console.log('connected to rabbitMQ');
+app.get('/status', require('../lib/routes/status-check'));
+app.listen(3004, function () {
+    console.log('List builder listening on port 3004');
+    eventSource.init('list-builder', function () {
+        console.log('connected to rabbitMQ');
 
-    eventSource.on('follow', listAddGenerator('follows'));
-    eventSource.on('unfollow', listDeleteGenerator('follows'));
+        eventSource.on('follow', listAddGenerator('follows'));
+        eventSource.on('unfollow', listDeleteGenerator('follows'));
 
-    eventSource.on('add-favourite', listAddGenerator('favourites'));
-    eventSource.on('delete-favourite', listDeleteGenerator('favourites'));
+        eventSource.on('add-favourite', listAddGenerator('favourites'));
+        eventSource.on('delete-favourite', listDeleteGenerator('favourites'));
+    });
 });

@@ -35,6 +35,7 @@ function actionHandlerGenerator(listType, actionName) {
 
 // Gets list for given user
 app.get('/:user/:listType', require('../lib/routes/uas-get-list'));
+app.get('/status', require('../lib/routes/status-check'));
 
 app.listen(3002, function () {
     console.log('UAS Gateway listening on port 3002');

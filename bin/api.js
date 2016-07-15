@@ -12,6 +12,8 @@ app.get('/:listType/:user', require('../lib/routes/api-get-list'));
 // Perform action on a list
 app.get('/:listType/:user/:action/:pid', require('../lib/routes/api-update-list'));
 
+app.get('/status', require('../lib/routes/status-check'));
+
 app.listen(3000, function () {
     console.log('API listening on port 3000');
     eventSource.init('api', function () {

@@ -19,6 +19,7 @@ app.get('/:user/:listName', function (request, response) {
 
     return response.send([]);
 });
+app.get('/status', require('../lib/routes/status-check'));
 
 readBuiltLists();
 app.listen(3003, function () {

@@ -1,0 +1,84 @@
+{
+  "services": [
+    {
+      "id": "api0",
+      "name": "api",
+      "tags": [
+        "master"
+      ],
+      "address": "127.0.0.1",
+      "port": 3000,
+      "checks": [
+        {
+          "http": "http://127.0.0.1:3000/status",
+          "interval": "5s",
+          "timeout": "2s"
+        }
+      ]
+    },
+    {
+      "id": "list-builder0",
+      "name": "list-builder",
+      "tags": [
+        "master"
+      ],
+      "address": "127.0.0.1",
+      "port": 3004,
+      "checks": [
+        {
+          "http": "http://127.0.0.1:3004/status",
+          "interval": "5s",
+          "timeout": "2s"
+        }
+      ]
+    },
+    {
+      "id": "list-retriever0",
+      "name": "list-retriever",
+      "tags": [
+        "master"
+      ],
+      "address": "127.0.0.1",
+      "port": 3003,
+      "checks": [
+        {
+          "http": "http://127.0.0.1:3003/status",
+          "interval": "5s",
+          "timeout": "2s"
+        }
+      ]
+    },
+    {
+      "id": "nitro-gateway0",
+      "name": "nitro-gateway",
+      "tags": [
+        "master"
+      ],
+      "address": "127.0.0.1",
+      "port": 3001,
+      "checks": [
+        {
+          "http": "http://127.0.0.1:3001/status",
+          "interval": "5s",
+          "timeout": "2s"
+        }
+      ]
+    },
+    {
+      "id": "uas-gateway0",
+      "name": "uas-gateway",
+      "tags": [
+        "master"
+      ],
+      "address": "127.0.0.1",
+      "port": 3002,
+      "checks": [
+        {
+          "http": "http://127.0.0.1:3002/status",
+          "interval": "5s",
+          "timeout": "2s"
+        }
+      ]
+    }
+  ]
+}

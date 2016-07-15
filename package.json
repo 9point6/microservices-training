@@ -15,7 +15,8 @@
     "nitro-go:test": "(go-bin/nitro-gateway &) && cd cuke && bundle exec cucumber; kill `ps aux | grep nitro-gateway | grep -v grep | awk '{print $2}'`",
     "uas": "nodemon bin/uas-gateway",
     "list-builder": "nodemon bin/list-builder",
-    "list-retriever": "nodemon bin/list-retriever"
+    "list-retriever": "nodemon bin/list-retriever",
+    "start-consul": "consul agent -dev -ui -config-file=./consul-service-definition.json"
   },
   "repository": {
     "type": "git",
