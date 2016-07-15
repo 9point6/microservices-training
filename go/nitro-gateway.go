@@ -26,6 +26,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     var pid = r.URL.Path[7:]
 
     asset, _ := json.Marshal(fakeNitro[pid])
+    w.Header().Set("Content-Type", "application/json")
     fmt.Fprintf(w, string(asset))
 }
 

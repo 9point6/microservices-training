@@ -7,7 +7,8 @@ When(/^the pid exists$/) do
 end
 
 Then(/^the response of the pid has the following attributes$/) do |table|
-  expect(@response.keys).to match(table.raw.flatten)
+  puts @response
+  expect(@response.keys).to match_array(table.raw.flatten)
   # puts @response.keys
   # puts table.raw.flatten
 end
