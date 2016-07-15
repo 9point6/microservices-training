@@ -2,6 +2,7 @@ var fs = require('fs');
 var request = require('request');
 var express = require('express');
 var eventSource = require('../lib/event-source');
+var serviceResolver = require('../lib/service-resolution');
 
 var app = express();
 var builtLists = JSON.parse(fs.readFileSync('built-lists.json', 'utf8'));
@@ -38,30 +39,34 @@ var getNitroAsset = (function () {
     }
 
     return function getNitroAsset(pid, callback) {
-        request('http://localhost:3001/asset/' + pid, function (err, response) {
-            if (circuitBreakerOpen) {
-                if (Date.now() > (circuitBreakerOpen + 10000)) {
-                    console.log('Nitro-gateway circuit breaker expired, trying again');
-                    circuitBreakerOpen = false;
-                } else {
-                    console.log('Nitro-gateway circuit breaker open, responding with dummy data');
-                    return callback('circuitBreakerOpen', generateDummyResponse(pid));
+        serviceResolver.getService('nitro-gateway', function(err, service) {
+            var url = 'http://' + service.ip + ':' + service.port + '/asset/' + pid;
+
+            request(url, function (err, response) {
+                if (circuitBreakerOpen) {
+                    if (Date.now() > (circuitBreakerOpen + 10000)) {
+                        console.log('Nitro-gateway circuit breaker expired, trying again');
+                        circuitBreakerOpen = false;
+                    } else {
+                        console.log('Nitro-gateway circuit breaker open, responding with dummy data');
+                        return callback('circuitBreakerOpen', generateDummyResponse(pid));
+                    }
                 }
-            }
 
-            if (err) {
-                console.log('Nitro-gateway error, opening circuit breaker');
-                circuitBreakerOpen = Date.now();
-                return callback(err, generateDummyResponse(pid));
-            }
+                if (err) {
+                    console.log('Nitro-gateway error, opening circuit breaker');
+                    circuitBreakerOpen = Date.now();
+                    return callback(err, generateDummyResponse(pid));
+                }
 
-            try {
-                callback(err, JSON.parse(response.body));
-            } catch (ex) {
-                console.log('Nitro-gateway JSON error, opening circuit breaker');
-                circuitBreakerOpen = Date.now();
-                callback(ex, generateDummyResponse(pid));
-            }
+                try {
+                    callback(err, JSON.parse(response.body));
+                } catch (ex) {
+                    console.log('Nitro-gateway JSON error, opening circuit breaker');
+                    circuitBreakerOpen = Date.now();
+                    callback(ex, generateDummyResponse(pid));
+                }
+            });
         });
     };
 })();
