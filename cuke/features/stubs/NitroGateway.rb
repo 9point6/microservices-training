@@ -1,7 +1,7 @@
 module StubBase
   class NitroGateway
     include HTTParty
-    base_uri 'localhost:3001'
+    base_uri 'nitro-gateway:3100'
 
     def initialize()
       @options = { query: {}}

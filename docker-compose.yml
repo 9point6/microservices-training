@@ -19,3 +19,11 @@ services:
       - consul
     ports:
       - "3100:3100"
+  cukes:
+    container_name: "cukes"
+    hostname: "cukes"
+    build:
+      context: .
+      dockerfile: docker/cukes/Dockerfile
+    links:
+      - nitro-gateway
