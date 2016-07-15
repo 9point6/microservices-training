@@ -6,5 +6,7 @@ prerequisites:
 build-nitro-go:
 	go install go/nitro-gateway.go
 
-build-docker-nitro: prerequisites
-	docker build -t nitro-gateway -f docker/nitro-gateway/Dockerfile .
+build-docker: prerequisites
+	docker-compose create
+	docker-compose build
+	docker-compose up
