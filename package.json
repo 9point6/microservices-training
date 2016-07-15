@@ -16,7 +16,8 @@
     "uas": "nodemon bin/uas-gateway",
     "list-builder": "nodemon bin/list-builder",
     "list-retriever": "nodemon bin/list-retriever",
-    "start-consul": "consul agent -dev -ui -config-file=./consul-service-definition.json"
+    "start-consul": "consul agent -dev -ui",
+    "start-consul:with-config": "consul agent -dev -ui -config-file=./consul-service-definition.json"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,11 @@
 var express = require('express');
 var eventSource = require('../lib/event-source');
 var uasAdapter = require('../lib/uas-adapter');
+var serviceRegistration = require('../lib/service-registration');
+
+var config = {
+    port: 3002
+};
 
 var app = express();
 var actionMap = {
@@ -37,8 +42,8 @@ function actionHandlerGenerator(listType, actionName) {
 app.get('/:user/:listType', require('../lib/routes/uas-get-list'));
 app.get('/status', require('../lib/routes/status-check'));
 
-app.listen(3002, function () {
-    console.log('UAS Gateway listening on port 3002');
+app.listen(config.port, function () {
+    console.log('UAS Gateway listening on port ' + config.port);
     eventSource.init('uas-gateway', function () {
         console.log('Connected to RabbitMQ!');
         eventSource.on('follow', actionHandlerGenerator('follows', 'follow'));
@@ -46,6 +51,11 @@ app.listen(3002, function () {
 
         eventSource.on('add-favourite', actionHandlerGenerator('favourites', 'add-favourite'));
         eventSource.on('delete-favourite', actionHandlerGenerator('favourites', 'delete-favourite'));
+        serviceRegistration.registerService('uas-gateway', config.port, function (err, success) {
+            if (success) {
+                console.log('Registered uas-gateway with consul');
+            }
+        });
     });
 });
 

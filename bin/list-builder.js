@@ -3,6 +3,11 @@ var request = require('request');
 var express = require('express');
 var eventSource = require('../lib/event-source');
 var serviceResolver = require('../lib/service-resolution');
+var serviceRegistration = require('../lib/service-registration');
+
+var config = {
+    port: 3004
+};
 
 var app = express();
 var builtLists = JSON.parse(fs.readFileSync('built-lists.json', 'utf8'));
@@ -102,8 +107,8 @@ function listDeleteGenerator(listType) {
 }
 
 app.get('/status', require('../lib/routes/status-check'));
-app.listen(3004, function () {
-    console.log('List builder listening on port 3004');
+app.listen(config.port, function () {
+    console.log('List builder listening on port ' + config.port);
     eventSource.init('list-builder', function () {
         console.log('connected to rabbitMQ');
 
@@ -112,5 +117,11 @@ app.listen(3004, function () {
 
         eventSource.on('add-favourite', listAddGenerator('favourites'));
         eventSource.on('delete-favourite', listDeleteGenerator('favourites'));
+
+        serviceRegistration.registerService('list-builder', config.port, function (err, success) {
+            if (success) {
+                console.log('Registered list-builder with consul');
+            }
+        });
     });
 });

@@ -1,6 +1,11 @@
 var fs = require('fs');
 var express = require('express');
 var eventSource = require('../lib/event-source');
+var serviceRegistration = require('../lib/service-registration');
+
+var config = {
+    port: 3003
+};
 
 var app = express();
 var builtLists;
@@ -22,10 +27,16 @@ app.get('/:user/:listName', function (request, response) {
 app.get('/status', require('../lib/routes/status-check'));
 
 readBuiltLists();
-app.listen(3003, function () {
-    console.log('List Retriever listening on port 3003');
+app.listen(config.port, function () {
+    console.log('List Retriever listening on port ' + config.port);
     eventSource.init('list-retriever', function () {
         console.log('Connected to RabbitMQ!');
         eventSource.on('list-built', readBuiltLists);
+
+        serviceRegistration.registerService('list-retriever', config.port, function (err, success) {
+            if (success) {
+                console.log('Registered list-retriever with consul');
+            }
+        });
     });
 });
