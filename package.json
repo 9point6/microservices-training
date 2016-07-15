@@ -9,10 +9,10 @@
   "scripts": {
     "api": "nodemon bin/api",
     "nitro": "nodemon bin/nitro-gateway",
-    "nitro:test": "(node bin/nitro-gateway &) && cd cuke && bundle exec cucumber && kill `ps aux | grep nitro-gateway | grep -v grep | awk '{print $2}'`",
+    "nitro:test": "(node bin/nitro-gateway &) && cd cuke && bundle exec cucumber; kill `ps aux | grep nitro-gateway | grep -v grep | awk '{print $2}'`",
     "nitro-go-build": "make",
     "nitro-go": "go-bin/nitro-gateway",
-    "nitro-go:test": "(go-bin/nitro-gateway &) && cd cuke && bundle exec cucumber && kill `ps aux | grep nitro-gateway | grep -v grep | awk '{print $2}'`",
+    "nitro-go:test": "(go-bin/nitro-gateway &) && cd cuke && bundle exec cucumber; kill `ps aux | grep nitro-gateway | grep -v grep | awk '{print $2}'`",
     "uas": "nodemon bin/uas-gateway",
     "list-builder": "nodemon bin/list-builder",
     "list-retriever": "nodemon bin/list-retriever"

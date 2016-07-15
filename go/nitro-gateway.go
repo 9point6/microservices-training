@@ -24,10 +24,14 @@ func loadFakeNitro() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
     var pid = r.URL.Path[7:]
-
-    asset, _ := json.Marshal(fakeNitro[pid])
     w.Header().Set("Content-Type", "application/json")
-    fmt.Fprintf(w, string(asset))
+
+    if asset, ok := fakeNitro[pid]; ok {
+        assetStr, _ := json.Marshal(asset)
+        fmt.Fprintf(w, string(assetStr))
+    } else {
+        fmt.Fprintf(w, "{\"error\":\"asset not found\"}")
+    }
 }
 
 func main() {
